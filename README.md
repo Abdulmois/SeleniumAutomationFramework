@@ -6,7 +6,7 @@ This project automates healthcare application test cases using Selenium and Java
 ## Tech Stack
 - Java
 - Selenium WebDriver
-- TestNG / Cucumber
+- TestNG 
 - Maven
 - Apache POI
 - GitHub
