@@ -1,18 +1,7 @@
-pipeline {
-    agent any
-
-    tools {
-        jdk 'JDK17'
-        maven 'Maven'
-    }
-
-    stages {
-        stage('Build & Test') {
-            steps {
-                bat 'java -version'
-                bat 'javac -version'
-                bat 'mvn clean test'
-            }
+stage('Build & Test') {
+    steps {
+        dir('SeleniumAutomationFramework') {
+            bat 'mvn clean test'
         }
     }
 }
