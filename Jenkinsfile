@@ -1,10 +1,17 @@
-stage('Build & Test') {
-    steps {
-        dir('SeleniumAutomationFramework') {
-            bat 'mvn clean test'
+pipeline {
+    agent any
+
+    stages {
+        stage('Build & Test') {
+            steps {
+                dir('SeleniumAutomationFramework') {
+                    bat 'mvn clean test'
+                }
+            }
         }
     }
 }
+
 
 
 
