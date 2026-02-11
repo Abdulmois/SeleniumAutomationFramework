@@ -1,10 +1,15 @@
 package PageObjectModel;
 
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import BasePackage.CommonToAllPages;
 import DriverPackage.DriverManagerTL;
 
@@ -50,18 +55,40 @@ public class AppointmentPage_POM extends CommonToAllPages{
 
 
 	public void selectVisitDate(String day, String monthYear) {
-		clickElement(visitDateField);  
 
-		WebElement monthYearElement = DriverManagerTL.getDriver().findElement(By.className("datepicker-switch"));
-		WebElement nextButton = DriverManagerTL.getDriver().findElement(By.className("next"));
+	    WebDriver driver = DriverManagerTL.getDriver();
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-		while (!monthYearElement.getText().equals(monthYear)) {
-			nextButton.click();
-			try { Thread.sleep(200); } catch (InterruptedException e) { e.printStackTrace(); }
-		}
+	    clickElement(visitDateField);
 
-		clickElement(By.xpath("//td[not(contains(@class,'old')) and not(contains(@class,'new'))][text()='" + day + "']"));
+	    while (true) {
+
+	        WebElement monthYearElement = wait.until(
+	                ExpectedConditions.visibilityOfElementLocated(
+	                        By.className("datepicker-switch")
+	                )
+	        );
+
+	        String currentMonthYear = monthYearElement.getText();
+
+	        if (currentMonthYear.equals(monthYear)) {
+	            break;
+	        }
+
+	        WebElement nextButton = wait.until(
+	                ExpectedConditions.elementToBeClickable(
+	                        By.className("next")
+	                )
+	        );
+
+	        nextButton.click();
+	    }
+
+	    wait.until(ExpectedConditions.elementToBeClickable(
+	            By.xpath("//td[not(contains(@class,'old')) and not(contains(@class,'new'))][text()='" + day + "']")
+	    )).click();
 	}
+
 
 
 	public boolean isConfirmationDisplayed() {
