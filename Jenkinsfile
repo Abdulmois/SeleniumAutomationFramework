@@ -8,14 +8,14 @@ pipeline {
         }
 
         stage('Build & Test') {
-            steps {
-                script {
-                    // Replace 'Maven-Local' with the name from Jenkins Global Tool Configuration
-                    def mvnHome = tool name: 'Maven-Local', type: 'maven'
-                    bat "\"${mvnHome}\\bin\\mvn\" clean test"
-                }
-            }
+    steps {
+        script {
+            def mvnHome = tool name: 'Maven-Local', type: 'maven'
+            bat "\"${mvnHome}\\bin\\mvn\" clean test"
         }
+    }
+}
+
     }
 
     post {
