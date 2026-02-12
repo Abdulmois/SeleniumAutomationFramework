@@ -14,11 +14,13 @@ pipeline {
         }
 
         stage('Build & Test') {
-            steps {
-                // Run Maven in root where pom.xml exists
-                bat '"C:\\ProgramData\\Jenkins\\.jenkins\\tools\\hudson.tasks.Maven_MavenInstallation\\Maven-Local\\bin\\mvn" clean test'
-            }
+    steps {
+        dir('Framework') {  // change to the folder containing pom.xml
+            bat '"C:\\ProgramData\\Jenkins\\.jenkins\\tools\\hudson.tasks.Maven_MavenInstallation\\Maven-Local\\bin\\mvn" clean test'
         }
+    }
+}
+
 
         stage('Publish Report') {
             steps {
