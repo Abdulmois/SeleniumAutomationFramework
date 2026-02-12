@@ -7,17 +7,16 @@ pipeline {
             }
         }
 
-     stage('Build & Test') {
+    stage('Build & Test') {
     steps {
         script {
-            def mvnHome = tool name: 'Maven-Local', type: 'maven'
-            
-            dir('Framework') {
-                bat "\"${mvnHome}\\bin\\mvn\" clean test"
+            dir("${WORKSPACE}") { // root folder
+                bat '"C:\\ProgramData\\Jenkins\\.jenkins\\tools\\hudson.tasks.Maven_MavenInstallation\\Maven-Local\\bin\\mvn" clean test'
             }
         }
     }
 }
+
 
 
     }
