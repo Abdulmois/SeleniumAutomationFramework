@@ -1,9 +1,10 @@
 pipeline {
     agent any
-    tools {
-        maven 'Maven-Local'  // your Maven installation name
-        jdk 'Java-21'        // if needed
-    }
+   tools {
+    maven 'Maven-Local'
+    jdk 'JDK-17'
+}
+
 
     stages {
         stage('Checkout SCM') {
