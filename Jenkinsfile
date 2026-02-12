@@ -7,14 +7,18 @@ pipeline {
             }
         }
 
-        stage('Build & Test') {
+     stage('Build & Test') {
     steps {
         script {
             def mvnHome = tool name: 'Maven-Local', type: 'maven'
-            bat "\"${mvnHome}\\bin\\mvn\" clean test"
+            
+            dir('Framework') {
+                bat "\"${mvnHome}\\bin\\mvn\" clean test"
+            }
         }
     }
 }
+
 
     }
 
