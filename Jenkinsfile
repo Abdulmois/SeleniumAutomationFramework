@@ -1,20 +1,31 @@
 pipeline {
     agent any
 
-    tools {
-        jdk 'JDK-17'
-        maven 'Maven-3'
-    }
-
     stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
         stage('Build & Test') {
             steps {
-                dir('SeleniumAutomationFramework') {
-                    bat 'java -version'
-                    bat 'javac -version'
-                    bat 'mvn clean test'
-                }
+                bat 'mvn clean test'
             }
+        }
+    }
+
+    post {
+        always {
+            // Publish TestNG reports
+            publishHTML(target: [
+                allowMissing: true,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'test-output',
+                reportFiles: 'index.html',
+                reportName: 'TestNG Report'
+            ])
         }
     }
 }
