@@ -57,45 +57,73 @@ public class AppointmentPage_POM extends CommonToAllPages{
 	public void selectVisitDate(String day, String monthYear) {
 
 	    WebDriver driver = DriverManagerTL.getDriver();
-	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
+	    // Click to open calendar
 	    clickElement(visitDateField);
 
-	    while (true) {
+	    // Wait until calendar is visible (entire widget)
+	    wait.until(ExpectedConditions.visibilityOfElementLocated(
+	            By.cssSelector(".datepicker-dropdown")));
+
+	    int maxAttempts = 12;  // safety to prevent infinite loop
+
+	    while (maxAttempts > 0) {
 
 	        WebElement monthYearElement = wait.until(
 	                ExpectedConditions.visibilityOfElementLocated(
-	                        By.className("datepicker-switch")
+	                        By.xpath("//th[@class='datepicker-switch']")
 	                )
 	        );
 
-	        String currentMonthYear = monthYearElement.getText();
+	        String currentMonthYear = monthYearElement.getText().trim();
 
-	        if (currentMonthYear.equals(monthYear)) {
+	        if (currentMonthYear.equalsIgnoreCase(monthYear)) {
 	            break;
 	        }
 
 	        WebElement nextButton = wait.until(
 	                ExpectedConditions.elementToBeClickable(
-	                        By.className("next")
+	                        By.xpath("//th[@class='next']")
 	                )
 	        );
 
 	        nextButton.click();
+	        maxAttempts--;
+	    }
+
+	    if (maxAttempts == 0) {
+	        throw new RuntimeException("Desired month not found in datepicker.");
 	    }
 
 	    wait.until(ExpectedConditions.elementToBeClickable(
-	            By.xpath("//td[not(contains(@class,'old')) and not(contains(@class,'new'))][text()='" + day + "']")
+	            By.xpath("//td[not(contains(@class,'old')) and not(contains(@class,'new')) and text()='"
+	                    + day + "']")
 	    )).click();
 	}
 
 
 
+
 	public boolean isConfirmationDisplayed() {
-		return DriverManagerTL.getDriver()
-				.findElements(appointmentConfirmation)
-				.size() > 0;
+
+	    WebDriver driver = DriverManagerTL.getDriver();
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+	    try {
+	        WebElement heading = wait.until(
+	                ExpectedConditions.visibilityOfElementLocated(
+	                        By.xpath("//h2[text()='Appointment Confirmation']")
+	                )
+	        );
+	        return heading.isDisplayed();
+
+	    } catch (Exception e) {
+	        return false;
+	    }
 	}
+
+
 
 
 

@@ -1,9 +1,12 @@
 package DriverPackage;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 
 public class DriverManagerTL {
@@ -41,12 +44,27 @@ public class DriverManagerTL {
 
 
 	public static void init() {
-		if(Objects.isNull(DriverManagerTL.getDriver())) {
-			WebDriver driver=new ChromeDriver();
-			driver.manage().window().maximize();
-			setDriver(driver);
-		}
+
+	    if (Objects.isNull(DriverManagerTL.getDriver())) {
+
+	        ChromeOptions options = new ChromeOptions();
+
+	        options.addArguments("--disable-notifications");
+	        options.addArguments("--disable-infobars");
+	        options.addArguments("--disable-popup-blocking");
+	        options.addArguments("--incognito");
+
+	        // 🔥 THIS IS IMPORTANT
+	        options.addArguments("--user-data-dir=C:/temp/automation-profile");
+
+	        WebDriver driver = new ChromeDriver(options);
+	        driver.manage().window().maximize();
+
+	        setDriver(driver);
+	    }
 	}
+
+
 
 
 }

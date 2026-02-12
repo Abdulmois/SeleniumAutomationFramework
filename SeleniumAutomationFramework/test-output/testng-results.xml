@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-02-12T08:18:14 IST" name="Default suite" finished-at="2026-02-12T08:18:48 IST" duration-ms="34672">
+    <groups>
+    </groups>
+    <test started-at="2026-02-12T08:18:14 IST" name="Default test" finished-at="2026-02-12T08:18:48 IST" duration-ms="34672">
+      <class name="tests.AppointmentTests">
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.AppointmentTests@229c6181]" started-at="2026-02-12T08:18:14 IST" name="setup" finished-at="2026-02-12T08:18:18 IST" duration-ms="4024" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testBookAppointmentNegative()[pri:0, instance:tests.AppointmentTests@229c6181]" started-at="2026-02-12T08:18:18 IST" name="testBookAppointmentNegative" finished-at="2026-02-12T08:18:35 IST" duration-ms="16941" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testBookAppointmentNegative -->
+        <test-method is-config="true" signature="teardown()[pri:0, instance:tests.AppointmentTests@229c6181]" started-at="2026-02-12T08:18:35 IST" name="teardown" finished-at="2026-02-12T08:18:35 IST" duration-ms="577" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- teardown -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.AppointmentTests@229c6181]" started-at="2026-02-12T08:18:35 IST" name="setup" finished-at="2026-02-12T08:18:37 IST" duration-ms="1904" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testFullAppointmentFlowPositive()[pri:0, instance:tests.AppointmentTests@229c6181]" started-at="2026-02-12T08:18:37 IST" name="testFullAppointmentFlowPositive" finished-at="2026-02-12T08:18:48 IST" duration-ms="10633" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testFullAppointmentFlowPositive -->
+        <test-method is-config="true" signature="teardown()[pri:0, instance:tests.AppointmentTests@229c6181]" started-at="2026-02-12T08:18:48 IST" name="teardown" finished-at="2026-02-12T08:18:48 IST" duration-ms="505" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- teardown -->
+      </class> <!-- tests.AppointmentTests -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
