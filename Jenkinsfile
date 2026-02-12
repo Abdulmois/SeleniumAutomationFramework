@@ -1,6 +1,5 @@
 pipeline {
     agent any
-
     stages {
         stage('Checkout') {
             steps {
@@ -10,15 +9,19 @@ pipeline {
 
         stage('Build & Test') {
             steps {
-                bat 'mvn clean test'
+                script {
+                    // Replace 'Maven-Local' with the name from Jenkins Global Tool Configuration
+                    def mvnHome = tool name: 'Maven-Local', type: 'maven'
+                    bat "\"${mvnHome}\\bin\\mvn\" clean test"
+                }
             }
         }
     }
 
     post {
         always {
-            // Publish TestNG reports
-            publishHTML(target: [
+            // TestNG HTML report
+            publishHTML([
                 allowMissing: true,
                 alwaysLinkToLastBuild: true,
                 keepAll: true,
