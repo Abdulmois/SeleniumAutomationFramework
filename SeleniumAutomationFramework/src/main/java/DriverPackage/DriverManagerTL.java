@@ -54,7 +54,7 @@ public class DriverManagerTL {
 	        options.addArguments("--disable-popup-blocking");
 	        options.addArguments("--incognito");
 
-	        // 🔥 THIS IS IMPORTANT
+	        
 	        options.addArguments("--user-data-dir=C:/temp/automation-profile");
 
 	        WebDriver driver = new ChromeDriver(options);
